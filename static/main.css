@@ -1,0 +1,17 @@
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+img {
+    display: block;    
+}
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif; 
+}
+#results {
+    box-shadow: 0 5px 5px 5px gray;
+    margin: 2em;
+}
