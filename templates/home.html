@@ -21,27 +21,38 @@
   
   <p><a href="{% url 'logout' %}">Log Out</a></p>
 {% else %}
-  <p>Welcome to [[message]]!</p>
+  <div id='login_links'>
+    <a href="{% url 'login' %}">Log In</a> |
+    <a href="{% url 'signup' %}">Sign Up</a>
+  </div>
+  <p id='intro'>Now Featuring</p>
+  <h1 id="welcome">[[message]]</h1>
 
+  
   <div id='search_div'>
     <input type='text' placeholder='search' v-model='search_text' @keydown.enter='loadContent()' required>
     <button @click='loadContent()'>Go!</button>
   </div>
 
+  
   <div v-if='this.content' id="results">
-    <p>[[content]]</p>
-    <p>[[Search]]</p>
-    <hr>
+    {% comment %} <p>[[content]]</p> {% endcomment %}
+    {% comment %} <p>[[Search]]</p> {% endcomment %}
     <div v-for='show in content.Search'>
-      <p>[[show.Title]]</p>
+      {% comment %} <p>[[show.Title]]</p>
       <p>[[show.Year]]</p>
-      <p>[[show.Type]]</p>
-      <p>[[show.Poster]]</p>
-      <img src='show.Poster'>
-      <hr>
+      <p>[[show.Type]]</p>      {% endcomment %}
+      <img @click='test(show.imdbID)' :src='show.Poster' alt='show.title Poster'>
+      
+      {% comment %} <a :href='`https://imdb.com/title/${show.imdbID}/`'><img :src='show.Poster' alt='show.title Poster'></a> {% endcomment %}
+      {% comment %} <p>[[plot]]</p> {% endcomment %}
+      <show-plot-comp
+      :show='show'
+      :plot='plot'
+      ></show-plot-comp>
     </div>
+    
   </div>
-  <a href="{% url 'login' %}">Log In</a> |
-  <a href="{% url 'signup' %}">Sign Up</a>
+  
 {% endif %}
 {% endblock %}

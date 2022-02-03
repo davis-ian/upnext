@@ -1,10 +1,37 @@
+Vue.component('show-plot-comp', {
+    data: function() {
+        return {
+            plot_visible: false,
+
+        }
+    },
+    props: ['plot'],
+    methods: {
+        toggle_plot: function() {
+            if (this.plot_visible === false) {
+                this.plot_visible = true
+            } else {
+                this.plot_visible = false
+            }
+        }
+    },
+    template:
+    `
+    <div>
+        <p v-if='this.plot_visible===true'>{{this.$root.plot}}</p>
+    </div>
+    `
+})
+
 let app = new Vue ({
     el: "#app",
     delimiters: ['[[',']]'],
     data: {
-        message: "upNext",
+        message: "upnext",
         search_text: '',
         content: '',
+        plot: '',
+        
     },
     methods: {
         fizz: function() {
@@ -28,11 +55,24 @@ let app = new Vue ({
             }).then(response => {
                 this.content = response.data
             })
+        },
+        test: function(search_id){
+            console.log(search_id)
+            axios({
+                method: 'get',
+                url: 'http://www.omdbapi.com/?apikey=887661b&',
+                params: {
+                    'i' : search_id,                    
+                }
+            }).then(response => {
+                this.plot = response.data
+            })
         }
+        
         
     },
     mounted: function() {
-        
+        this.test(search_id)
         // this.fizz()
     }
 })
