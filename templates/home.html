@@ -30,29 +30,20 @@
 
   
   <div id='search_div'>
-    <input type='text' placeholder='search' v-model='search_text' @keydown.enter='loadContent()' required>
-    <button @click='loadContent()'>Go!</button>
+    <input type='text' placeholder='search' v-model='search_text' @keydown.enter='loadNew()' required>
+    <button @click='loadNew()'>Go!</button>
   </div>
 
   
-  <div v-if='this.content' id="results">
-    {% comment %} <p>[[content]]</p> {% endcomment %}
-    {% comment %} <p>[[Search]]</p> {% endcomment %}
-    <div v-for='show in content.Search'>
-      {% comment %} <p>[[show.Title]]</p>
-      <p>[[show.Year]]</p>
-      <p>[[show.Type]]</p>      {% endcomment %}
-      <img @click='test(show.imdbID)' :src='show.Poster' alt='show.title Poster'>
-      
-      {% comment %} <a :href='`https://imdb.com/title/${show.imdbID}/`'><img :src='show.Poster' alt='show.title Poster'></a> {% endcomment %}
-      {% comment %} <p>[[plot]]</p> {% endcomment %}
-      <show-plot-comp
-      :show='show'
-      :plot='plot'
-      ></show-plot-comp>
+  <div v-if='this.all' id="results">
+    <div v-for='result in all.items'>
+      <p>[[result.title]]</p>
+      <img :src='result.image'>
     </div>
     
   </div>
+
+  
   
 {% endif %}
 {% endblock %}

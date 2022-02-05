@@ -1,0 +1,1 @@
+s_key = 'django-insecure-w&@okk=8)4(@4j(+9ty*w&zd**dk#a1@0h3f73j#ji+_)!=29a'
